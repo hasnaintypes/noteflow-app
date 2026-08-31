@@ -2,6 +2,8 @@
 
 A minimal, drag-and-drop sticky notes app. Create notes, move them anywhere on the board, recolor them, and everything autosaves in the background.
 
+**Live:** [noteflowio.vercel.app](https://noteflowio.vercel.app)
+
 ![NoteFlow Demo](public/demo.gif)
 
 ## Features

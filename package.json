@@ -1,8 +1,25 @@
 {
-  "name": "note-flow",
+  "name": "noteflow-app",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "description": "A minimal drag-and-drop sticky notes app built with React and Vite, backed by Upstash Redis via Vercel serverless functions.",
+  "homepage": "https://noteflowio.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hasnaintypes/noteflow-app.git"
+  },
+  "keywords": [
+    "sticky-notes",
+    "react",
+    "vite",
+    "vercel",
+    "upstash",
+    "redis",
+    "serverless",
+    "notes-app",
+    "drag-and-drop"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
