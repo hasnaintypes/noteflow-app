@@ -1,7 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { NotesContext } from "../context/NotesContext";
-import { db } from "../appwrite/databases";
+import { db } from "../lib/db";
 
 const Color = ({ color }) => {
     const { selectedNote, notes, setNotes } = useContext(NotesContext);

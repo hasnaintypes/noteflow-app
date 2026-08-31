@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import { useState, useEffect } from "react";
 import Spinner from "../icons/Spinner";
-import { db } from "../appwrite/databases";
+import { db } from "../lib/db";
 
 export const NotesContext = createContext();
 

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Trash from "../icons/Trash";
 import { setNewOffset, autoGrow, setZIndex, bodyParser } from "../utils";
-import { db } from "../appwrite/databases";
+import { db } from "../lib/db";
 import Spinner from "../icons/Spinner";
 import DeleteButton from "../components/DeleteButton";
 import { useContext } from "react";

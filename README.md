@@ -1,93 +1,100 @@
 # NoteFlow
 
-## 📝 Overview
+A minimal, drag-and-drop sticky notes app. Create notes, move them anywhere on the board, recolor them, and everything autosaves in the background.
 
-NoteFlow is a modern, user-friendly note-taking application built with React and Appwrite. It provides an intuitive and seamless experience for managing notes, allowing users to organize their thoughts efficiently with features like draggable notes, autosave, and customizable colors.
+![NoteFlow Demo](public/demo.gif)
 
-![NoteFlow Demo](demo.gif)
+## Features
 
-## 🚀 Features
+- **Draggable notes** — position each note anywhere on the board; layout is saved automatically
+- **Autosave** — note content and position sync to the backend a couple seconds after you stop typing/dragging
+- **Color picker** — recolor any note from a preset palette
+- **Serverless backend** — notes are stored in Upstash Redis via Vercel serverless functions, no server to manage
 
-- **Production Database** – All notes are stored securely in a live production-ready database.
-- **Draggable Notes** – Drag and drop notes anywhere on the screen for better organization.
-- **Autosave Changes** – Changes to note content and position are automatically saved in real time.
-- **Color Picker** – Customize notes by changing their colors anytime.
+## Tech Stack
 
-## 🏗️ Tech Stack
+| Layer     | Tech                                       |
+| --------- | ------------------------------------------ |
+| Frontend  | React 19, React Router, Vite               |
+| API       | Vercel Serverless Functions (Node)         |
+| Data      | Upstash Redis                              |
+| Hosting   | Vercel                                     |
 
-### Frontend:
+## Getting Started
 
-- React JS
-- Tailwind CSS (for styling)
+### Prerequisites
 
-### Backend:
+- Node.js 20+
+- A [Vercel](https://vercel.com) account
+- The [Vercel CLI](https://vercel.com/docs/cli) — `npm install -g vercel`
 
-- Appwrite (Database, Authentication, Storage)
-
-## 📦 Installation
-
-To run NoteFlow locally, follow these steps:
-
-### 1️⃣ Clone the Repository
+### 1. Clone the repository
 
 ```sh
-git clone https://github.com/nainee99/NoteFlow.git
-cd note-flow
+git clone https://github.com/hasnaintypes/noteflow-app.git
+cd noteflow-app
 ```
 
-### 2️⃣ Install Dependencies
+### 2. Install dependencies
 
 ```sh
 npm install
-# or
-yarn install
 ```
 
-### 3️⃣ Set Up Appwrite
-
-1. Install and configure [Appwrite](https://appwrite.io/docs/installation) on your server.
-2. Create a new project and configure the necessary database and collections.
-3. Set up authentication if required.
-4. Add your Appwrite credentials to an `.env` file:
+### 3. Link the project and provision Redis
 
 ```sh
-VITE_APPWRITE_PROJECT_ID=your_project_id
-VITE_APPWRITE_ENDPOINT=https://cloud.appwrite.io/v1
-VITE_APPWRITE_DATABASE_ID=your_database_id
-VITE_APPWRITE_COLLECTION_ID=your_collection_id
+vercel link
+vercel integration add upstash/upstash-kv
 ```
 
-### 4️⃣ Run the App
+This provisions a free Upstash Redis database and connects it to the project. Then pull the generated environment variables:
 
 ```sh
-npm run dev
-# or
-yarn dev
+vercel env pull .env.local
 ```
 
-The application will be available at `http://localhost:5173` (if using Vite).
+`.env.local` should end up with `KV_REST_API_URL`, `KV_REST_API_TOKEN`, and `KV_REST_API_READ_ONLY_TOKEN` — see `.env.example` for reference.
 
-## 📌 Roadmap
+### 4. Run it locally
 
-Future enhancements may include:
+The notes API runs as Vercel serverless functions, so use `vercel dev` (not plain `vite`) to get the full app working locally:
 
-- **Markdown Support** for rich-text notes.
-- **Collaboration** to allow multiple users to edit notes in real time.
-- **Search & Filter** functionality for better note organization.
-- **Offline Mode** for taking notes without an internet connection.
+```sh
+vercel dev
+```
 
-## 🤝 Contributing
+The app will be available at `http://localhost:3000` (or the port `vercel dev` reports).
 
-Contributions are welcome! To contribute:
+## Deployment
 
-1. Fork the repository.
-2. Create a new branch.
-3. Make your changes.
-4. Submit a pull request.
+```sh
+vercel        # preview deployment
+vercel --prod # production deployment
+```
 
-## 🛡️ License
+## Project Structure
 
-This project is licensed under the MIT License. See the `LICENSE` file for details.
----
+```
+api/
+  notes/
+    index.js     # GET (list) / POST (create)
+    [id].js      # GET / PATCH (update) / DELETE
+src/
+  components/    # UI components (notes board, controls, buttons)
+  context/       # Notes state (React context)
+  icons/         # Inline SVG icon components
+  lib/           # Client-side API wrapper
+  pages/         # Route-level pages
+```
 
-Happy Coding! 🚀
+## Roadmap
+
+- Markdown support for note content
+- Real-time multi-user collaboration
+- Search and filter across notes
+- Offline mode with local persistence
+
+## Contributing
+
+Contributions are welcome. Fork the repo, create a branch, make your changes, and open a pull request.

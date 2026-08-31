@@ -1,5 +1,5 @@
 import Trash from "../icons/Trash";
-import { db } from "../appwrite/databases";
+import { db } from "../lib/db";
 import { useContext } from "react";
 import { NotesContext } from "../context/NotesContext";
 
